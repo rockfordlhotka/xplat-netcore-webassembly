@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  greeter:
+    image: ${DOCKER_REGISTRY-}greeter
+    build:
+      context: .
+      dockerfile: ../Greeter/Dockerfile
+
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: ../Gateway/Dockerfile
