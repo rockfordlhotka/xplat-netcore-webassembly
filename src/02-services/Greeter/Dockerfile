@@ -3,9 +3,9 @@ WORKDIR /app
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY Greeter.csproj Greeter/
+COPY Greeter/Greeter.csproj Greeter/
 RUN dotnet restore Greeter/Greeter.csproj
-COPY . ./Greeter
+COPY . .
 WORKDIR /src/Greeter
 RUN dotnet build Greeter.csproj -c Release -o /app
 
