@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Collatz.Core\Collatz.Core.csproj" />
+    <ProjectReference Include="..\Collatz.Core\Collatz.Core.csproj" />
   </ItemGroup>
 
 </Project>

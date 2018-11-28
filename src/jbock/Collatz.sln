@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Core", "..\Collatz.Core\Collatz.Core.csproj", "{B9F9C883-A62E-4566-808A-0EC2BE3E16EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Core", "Collatz.Core\Collatz.Core.csproj", "{B9F9C883-A62E-4566-808A-0EC2BE3E16EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Core.Tests", "Collatz.Core.Tests\Collatz.Core.Tests.csproj", "{CC0F1D53-FE2B-40CC-BA32-5DC8F83E9CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Api", "Collatz.Api\Collatz.Api.csproj", "{8B907707-CA97-46CB-8773-BCD101FD7418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CC0F1D53-FE2B-40CC-BA32-5DC8F83E9CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0F1D53-FE2B-40CC-BA32-5DC8F83E9CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0F1D53-FE2B-40CC-BA32-5DC8F83E9CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B907707-CA97-46CB-8773-BCD101FD7418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B907707-CA97-46CB-8773-BCD101FD7418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B907707-CA97-46CB-8773-BCD101FD7418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B907707-CA97-46CB-8773-BCD101FD7418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
