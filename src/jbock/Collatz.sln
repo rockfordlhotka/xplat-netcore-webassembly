@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Api", "Collatz.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Api.Tests", "Collatz.Api.Tests\Collatz.Api.Tests.csproj", "{E4FE41B8-9979-4B75-90C0-CF7B6E2581EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Api.Client", "Collatz.Api.Client\Collatz.Api.Client.csproj", "{5304FFEF-C02E-4E05-A1AC-51B1E5F2215A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E4FE41B8-9979-4B75-90C0-CF7B6E2581EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4FE41B8-9979-4B75-90C0-CF7B6E2581EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4FE41B8-9979-4B75-90C0-CF7B6E2581EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5304FFEF-C02E-4E05-A1AC-51B1E5F2215A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5304FFEF-C02E-4E05-A1AC-51B1E5F2215A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5304FFEF-C02E-4E05-A1AC-51B1E5F2215A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5304FFEF-C02E-4E05-A1AC-51B1E5F2215A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
