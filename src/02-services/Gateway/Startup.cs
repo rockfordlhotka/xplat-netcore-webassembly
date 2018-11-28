@@ -53,6 +53,8 @@ namespace Gateway
       app.UseCookiePolicy();
 
       app.UseMvc();
+
+      Configuration.ConfigureCsla();
     }
   }
 }

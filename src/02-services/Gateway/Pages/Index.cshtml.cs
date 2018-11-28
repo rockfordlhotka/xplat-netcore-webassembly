@@ -15,7 +15,7 @@ namespace Gateway.Pages
     private static IConnection connection;
 
     [BindProperty]
-    public string UserInput { get; set; }
+      public string UserInput { get; set; }
 
     [BindProperty]
     public string ReplyText { get; set; }
@@ -37,6 +37,7 @@ namespace Gateway.Pages
 
     private async Task WaitForReply()
     {
+      var resetEvent = new AsyncManualResetEvent();
       using (var channel = connection.CreateModel())
       {
         channel.QueueDeclare(queue: "gateway", durable: false, exclusive: false, autoDelete: false, arguments: null);
@@ -46,9 +47,10 @@ namespace Gateway.Pages
         {
           var message = Encoding.UTF8.GetString(ea.Body);
           ReplyText = message;
+          resetEvent.Set();
         };
         channel.BasicConsume(queue: "gateway", autoAck: true, consumer: consumer);
-        await Task.Delay(100);
+        await resetEvent.WaitAsync();
       }
     }
 

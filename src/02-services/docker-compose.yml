@@ -1,5 +1,8 @@
 version: '3.4'
 
+# use of absolute paths here is a workaround for a bug in the current version of
+# Docker for Windows (as of 28 Nov 2018)
+
 services:
   greeter:
     image: ${DOCKER_REGISTRY-}greeter
