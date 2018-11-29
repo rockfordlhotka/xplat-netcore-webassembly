@@ -5,9 +5,6 @@
 
 <h1>Collatz</h1>
 
-<p>Latest Sequence: @latestSequence</p>
-<input type="text" bind="@value" />
-<button class="btn btn-primary" onclick="@CalculateSequence">Calculate Sequence</button>
 <p>Calculations are being made at:</p>
 <ul>
     <li>Latitude: @location?.Latitude</li>
@@ -22,6 +19,10 @@
         <a id="dirMapLink" href="@bingDirectionsUrl" target="_blank">Get Directions</a>
     </div>
 </div>
+<input type="text" bind="@value" />
+<button class="btn btn-primary" onclick="@CalculateSequence">Calculate Sequence</button>
+<p>Latest Sequence: @latestSequence</p>
+
 
 @functions {
 string value = default;
