@@ -1,24 +1,53 @@
-﻿@page "/sequence"
+﻿@using AspNetMonsters.Blazor.Geolocation
+
+@page "/sequence"
+@inject LocationService  LocationService
 
 <h1>Collatz</h1>
 
 <p>Latest Sequence: @latestSequence</p>
 <input type="text" bind="@value" />
 <button class="btn btn-primary" onclick="@CalculateSequence">Calculate Sequence</button>
+<p>Calculations are being made at:</p>
+<ul>
+    <li>Latitude: @location?.Latitude</li>
+    <li>Longitude: @location?.Longitude</li>
+    <li>Accuracy: @location?.Accuracy</li>
+</ul>
+<!--From https://www.bing.com/maps/embed-a-map-->
+<div>
+    <iframe width="500" height="400" frameborder="0" src="@bingMainUrl" scrolling="no"></iframe>
+    <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+        <a id="largeMapLink" href="@bingLargeMapUrl" target="_blank">View Larger Map</a> &nbsp; | &nbsp;
+        <a id="dirMapLink" href="@bingDirectionsUrl" target="_blank">Get Directions</a>
+    </div>
+</div>
 
 @functions {
-    string value = default;
-    string latestSequence = string.Empty;
+string value = default;
+string latestSequence = string.Empty;
+Location location;
+string bingMainUrl = default;
+string bingLargeMapUrl = default;
+string bingDirectionsUrl = default;
 
-    void CalculateSequence()
+protected override async Task OnInitAsync()
+{
+    location = await LocationService.GetLocationAsync();
+    bingMainUrl = $"https://www.bing.com/maps/embed?h=400&w=500&cp={location.Latitude}~{location.Longitude}&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8";
+    bingLargeMapUrl = $"https://www.bing.com/maps?cp={location.Latitude}~{location.Longitude}&amp;sty=r&amp;lvl=11&amp;FORM=MBEDLD";
+    bingDirectionsUrl = $"https://www.bing.com/maps/directions?cp={location.Latitude}~-{location.Longitude}&amp;sty=r&amp;lvl=11&amp;rtp=~pos.{location.Latitude}_{location.Longitude}____&amp;FORM=MBEDLD";
+}
+
+void CalculateSequence()
+{
+    if (BigInteger.TryParse(value, out var number))
     {
-        if (BigInteger.TryParse(value, out var number))
-        {
-            latestSequence = string.Join(", ", new CollatzSequence(number).Sequence);
-        }
-        else
-        {
-            latestSequence = $"{value} is not a valid BigInteger.";
-        }
+        latestSequence = string.Join(", ", new CollatzSequence(number).Sequence);
     }
+    else
+    {
+        latestSequence = $"{value} is not a valid BigInteger.";
+    }
+}
 }
