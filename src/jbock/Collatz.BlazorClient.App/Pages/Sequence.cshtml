@@ -1,0 +1,24 @@
+﻿@page "/sequence"
+
+<h1>Collatz</h1>
+
+<p>Latest Sequence: @latestSequence</p>
+<input type="text" bind="@value" />
+<button class="btn btn-primary" onclick="@CalculateSequence">Calculate Sequence</button>
+
+@functions {
+    string value = default;
+    string latestSequence = string.Empty;
+
+    void CalculateSequence()
+    {
+        if (BigInteger.TryParse(value, out var number))
+        {
+            latestSequence = string.Join(", ", new CollatzSequence(number).Sequence);
+        }
+        else
+        {
+            latestSequence = $"{value} is not a valid BigInteger.";
+        }
+    }
+}
