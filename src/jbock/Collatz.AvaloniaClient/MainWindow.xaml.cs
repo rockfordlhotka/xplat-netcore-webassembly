@@ -8,13 +8,7 @@ namespace Collatz.AvaloniaClient
 {
 	public class MainWindow : Window
 	{
-		public MainWindow()
-		{
-			this.InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
-		}
+		public MainWindow() => this.InitializeComponent();
 
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 

@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.GuiClient", "Collat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.AvaloniaClient", "Collatz.AvaloniaClient\Collatz.AvaloniaClient.csproj", "{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.BlazorClient.Server", "Collatz.BlazorClient.Server\Collatz.BlazorClient.Server.csproj", "{13902FB6-A3B5-450D-8740-CB0C88BB2900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.BlazorClient.App", "Collatz.BlazorClient.App\Collatz.BlazorClient.App.csproj", "{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.WebAssembly", "Collatz.WebAssembly\Collatz.WebAssembly.csproj", "{B6F15004-C803-449B-8824-AF4758A91FBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F15004-C803-449B-8824-AF4758A91FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F15004-C803-449B-8824-AF4758A91FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F15004-C803-449B-8824-AF4758A91FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F15004-C803-449B-8824-AF4758A91FBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
