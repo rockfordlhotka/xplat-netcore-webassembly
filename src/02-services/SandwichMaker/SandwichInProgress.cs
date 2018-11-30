@@ -41,26 +41,26 @@ namespace SandwichMaker
 
     public string GetDescription()
     {
-      if (IsComplete && !Failed)
-      {
-        var result = $"{Request.Meat} on {Request.Bread} with {Request.Cheese}";
-        if (Request.Lettuce)
-          result += " and lettuce";
-        return result;
-      }
-      return string.Empty;
+      var result = $"{Request.Meat} on {Request.Bread} with {Request.Cheese}";
+      if (Request.Lettuce)
+        result += " and lettuce";
+      return result;
     }
 
     public string GetFailureReason()
     {
-      if (GotMeat.HasValue && !GotMeat.Value)
-        return "No meat";
-      if (GotBread.HasValue && !GotBread.Value)
-        return "No bread";
-      if (GotCheese.HasValue && !GotCheese.Value)
-        return "No cheese";
-      if (GotLettuce.HasValue && !GotLettuce.Value)
-        return "No lettuce";
+      if (Failed)
+      {
+        if (GotMeat.HasValue && !GotMeat.Value)
+          return "No meat";
+        if (GotBread.HasValue && !GotBread.Value)
+          return "No bread";
+        if (GotCheese.HasValue && !GotCheese.Value)
+          return "No cheese";
+        if (GotLettuce.HasValue && !GotLettuce.Value)
+          return "No lettuce";
+        return $"The cook failed to make {GetDescription()}";
+      }
       return string.Empty;
     }
   }

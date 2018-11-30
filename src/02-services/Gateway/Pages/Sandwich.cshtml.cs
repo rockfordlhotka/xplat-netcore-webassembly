@@ -11,8 +11,6 @@ namespace Gateway.Pages
 {
   public class SandwichModel : PageModel
   {
-    private readonly RabbitQueue.Queue _queue = new RabbitQueue.Queue("40.117.117.72", "customer");
-
     [BindProperty]
     public string TheMeat { get; set; }
     [BindProperty]
@@ -30,32 +28,36 @@ namespace Gateway.Pages
 
     public void OnGet()
     {
-
     }
 
     public async Task OnPost()
     {
-      _queue.StartListening((ea, message) =>
+      using (var _queue = new Queue("40.117.117.72", "customer"))
       {
-        var response = JsonConvert.DeserializeObject<Messages.SandwichReponse>(message);
-        if (response.Success)
-          ReplyText = response.Description;
-        else
-          ReplyText = response.Error;
-      });
+        var reset = new AsyncManualResetEvent();
+        _queue.StartListening((ea, message) =>
+        {
+          var response = JsonConvert.DeserializeObject<Messages.SandwichReponse>(message);
+          if (response.Success)
+            ReplyText = $"SUCCESS: {response.Description}";
+          else
+            ReplyText = $"FAILED: {response.Error}";
+          reset.Set();
+        });
 
-      var request = new Messages.SandwichRequest
-      {
-        Meat = TheMeat,
-        Bread = TheBread,
-        Cheese = TheCheese,
-        Lettuce = TheLettuce
-      };
-      _queue.SendMessage("sandwichmaker", Guid.NewGuid().ToString(), request);
+        var request = new Messages.SandwichRequest
+        {
+          Meat = TheMeat,
+          Bread = TheBread,
+          Cheese = TheCheese,
+          Lettuce = TheLettuce
+        };
+        _queue.SendMessage("sandwichmaker", Guid.NewGuid().ToString(), request);
 
-      var task = new AsyncManualResetEvent().WaitAsync();
-      if (await Task.WhenAny(task, Task.Delay(1000)) != task)
-        ReplyText = "The cook didn't get back to us in time, no sandwich";
+        var task = reset.WaitAsync();
+        if (await Task.WhenAny(task, Task.Delay(10000)) != task)
+          ReplyText = "The cook didn't get back to us in time, no sandwich";
+      }
     }
   }
 }
