@@ -17,9 +17,9 @@ namespace Collatz.GuiClient
 
 			var menu = new MenuBar(new MenuBarItem[] 
 			{
-				new MenuBarItem ("_Application", new MenuItem [] 
+				new MenuBarItem("_Application", new MenuItem [] 
 				{
-					 new MenuItem ("_Quit", "", () => top.Running = false)
+					 new MenuItem("_Quit", "", () => top.Running = false)
 				})
 			});
 			top.Add(menu);
