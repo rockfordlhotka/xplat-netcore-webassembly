@@ -11,6 +11,8 @@ namespace SandwichMaker
 	 class SandwichMaker
 	 {
     private static Queue _queue = new Queue("40.117.117.72", "sandwichmaker");
+    private static readonly Dictionary<string, SandwichInProgress> _workInProgress =
+      new Dictionary<string, SandwichInProgress>();
 
     static async Task Main(string[] args)
     {
@@ -21,9 +23,8 @@ namespace SandwichMaker
       await new AsyncManualResetEvent().WaitAsync();
     }
 
-    private static void HandleMessage(BasicDeliverEventArgs ea)
+    private static void HandleMessage(BasicDeliverEventArgs ea, string message)
     {
-      var message = Encoding.UTF8.GetString(ea.Body);
       switch (ea.BasicProperties.Type)
       {
         case "SandwichRequest":
@@ -33,7 +34,7 @@ namespace SandwichMaker
           HandleMeatBinResponse(ea, message);
           break;
         case "BreadBinResponse":
-          HandleCheeseBinResponse(ea, message);
+          HandleBreadBinResponse(ea, message);
           break;
         case "CheeseBinResponse":
           HandleCheeseBinResponse(ea, message);
@@ -42,7 +43,24 @@ namespace SandwichMaker
           HandleLettuceBinResponse(ea, message);
           break;
         default:
+          Console.WriteLine($"Unknown message type '{ea.BasicProperties.Type}' from {ea.BasicProperties.ReplyTo}");
           break;
+      }
+    }
+
+    private static void HandleCheeseBinResponse(BasicDeliverEventArgs ea, string message)
+    {
+      if (_workInProgress.TryGetValue(ea.BasicProperties.CorrelationId, out SandwichInProgress wip))
+      {
+        var response = JsonConvert.DeserializeObject<Messages.CheeseBinResponse>(message);
+        wip.GotCheese = response.Success;
+        SeeIfSandwichIsComplete(wip);
+      }
+      else
+      {
+        // got Cheese we apparently don't need, so return it
+        Console.WriteLine("Returning unneeded Cheese");
+        _queue.SendReply("Cheesebin", null, new Messages.CheeseBinRequest { Returning = true });
       }
     }
 
@@ -56,6 +74,41 @@ namespace SandwichMaker
       }
       else
       {
+        // got lettuce we apparently don't need, so return it
+        Console.WriteLine("Returning unneeded lettuce");
+        _queue.SendReply("lettucebin", null, new Messages.LettuceBinRequest { Returning = true });
+      }
+    }
+
+    private static void HandleBreadBinResponse(BasicDeliverEventArgs ea, string message)
+    {
+      if (_workInProgress.TryGetValue(ea.BasicProperties.CorrelationId, out SandwichInProgress wip))
+      {
+        var response = JsonConvert.DeserializeObject<Messages.BreadBinResponse>(message);
+        wip.GotBread = response.Success;
+        SeeIfSandwichIsComplete(wip);
+      }
+      else
+      {
+        // got Bread we apparently don't need, so return it
+        Console.WriteLine("Returning unneeded Bread");
+        _queue.SendReply("Breadbin", null, new Messages.BreadBinRequest { Returning = true });
+      }
+    }
+
+    private static void HandleMeatBinResponse(BasicDeliverEventArgs ea, string message)
+    {
+      if (_workInProgress.TryGetValue(ea.BasicProperties.CorrelationId, out SandwichInProgress wip))
+      {
+        var response = JsonConvert.DeserializeObject<Messages.MeatBinResponse>(message);
+        wip.GotMeat = response.Success;
+        SeeIfSandwichIsComplete(wip);
+      }
+      else
+      {
+        // got Meat we apparently don't need, so return it
+        Console.WriteLine("Returning unneeded Meat");
+        _queue.SendReply("Meatbin", null, new Messages.MeatBinRequest { Returning = true });
       }
     }
 
@@ -71,20 +124,7 @@ namespace SandwichMaker
         });
       }
     }
-
-    private static void HandleCheeseBinResponse(BasicDeliverEventArgs ea, string message)
-    {
-      throw new NotImplementedException();
-    }
-
-    private static void HandleMeatBinResponse(BasicDeliverEventArgs ea, string message)
-    {
-      throw new NotImplementedException();
-    }
-
-    private static readonly Dictionary<string, SandwichInProgress> _workInProgress = 
-      new Dictionary<string, SandwichInProgress>();
-
+    
     private static void RequestIngredients(BasicDeliverEventArgs ea, string message)
     {
       var request = JsonConvert.DeserializeObject<Messages.SandwichRequest>(message);
@@ -109,7 +149,7 @@ namespace SandwichMaker
       if (!string.IsNullOrEmpty(request.Cheese))
       {
         _queue.SendMessage("CheeseBin", ea.BasicProperties.CorrelationId,
-          new Messages.CheeseBinRequestBinRequest { Cheese = request.Cheese });
+          new Messages.CheeseBinRequest { Cheese = request.Cheese });
       }
       if (request.Lettuce)
       {
