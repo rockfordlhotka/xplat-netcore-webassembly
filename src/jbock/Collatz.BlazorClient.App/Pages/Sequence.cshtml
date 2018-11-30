@@ -64,38 +64,34 @@
                Scales = new Scales
                {
                    xAxes = new List<Axis>
-                {
-                    new Axis
+        {
+            new Axis
+            {
+                    Display = "xAxesDisplay",
+                    ScaleLabel = new ScaleLabel
                     {
-                            Display = "xAxesDisplay",
-                            ScaleLabel = new ScaleLabel
-                            {
-                                Display = "."
-                            }
+                        Display = "."
                     }
-                },
+            }
+        },
                    yAxes = new List<Axis>
-                {
-                    new Axis
+        {
+            new Axis
+            {
+                    Display = "yAxes",
+                    ScaleLabel = new ScaleLabel
                     {
-                            Display = "yAxes",
-                            ScaleLabel = new ScaleLabel
-                            {
-                                Display = "..",
-                                LabelString = "Value"
-                            }
+                        Display = "..",
+                        LabelString = "Value"
                     }
-                }
+            }
+        }
                },
                Hover = new LineChartOptionsHover
                {
                    Intersect = true,
                    Mode = Mode.nearest
                }
-           },
-           Data = new LineChartData
-           {
-               Datasets = new List<LineChartDataset>()
            }
        };
    }
@@ -114,20 +110,24 @@
        {
            var sequence = new CollatzSequence(number).Sequence;
            latestSequence = string.Join(", ", sequence);
-           //lineChartConfig.Data.Labels.Clear();
-           //lineChartConfig.Data.Labels.AddRange(Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()));
-           //lineChartConfig.Data = new LineChartData { Datasets = new List<LineChartDataset>() };
-           //lineChartConfig.Data.Datasets.Add(new LineChartDataset
-           //{
-           //    BackgroundColor = "#ff6384",
-           //    BorderColor = "#ff6384",
-           //    Fill = false,
-           //    BorderWidth = 2,
-           //    PointRadius = 3,
-           //    PointBorderWidth = 1,
-           //    Data = sequence.Select(_ => (object)_).ToList()
-           //});
-           //lineChartJs.Reload();
+           lineChartConfig.Data = new LineChartData
+           {
+               Datasets = new List<LineChartDataset>
+                {
+                    new LineChartDataset
+                    {
+                        BackgroundColor = "#ff6384",
+                        BorderColor = "#ff6384",
+                        Fill = false,
+                        BorderWidth = 2,
+                        PointRadius = 3,
+                        PointBorderWidth = 1,
+                        Data = sequence.Select(_ => (object)_).ToList()
+                    }
+                },
+               Labels = Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()).ToList()
+           };
+           lineChartJs.Reload();
        }
        else
        {
