@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Gateway\Gateway.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandwichMaker", "SandwichMaker\SandwichMaker.csproj", "{2D547D7C-DDFD-49F5-B18E-D99ECFC98C32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngredientBin", "IngredientBin\IngredientBin.csproj", "{1711B6A3-51AA-4167-859D-DCC16152CFCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitQueue", "RabbitQueue\RabbitQueue.csproj", "{BAC5CF0F-8C7E-4B18-93F2-AB785DB7B5F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{2D547D7C-DDFD-49F5-B18E-D99ECFC98C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D547D7C-DDFD-49F5-B18E-D99ECFC98C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D547D7C-DDFD-49F5-B18E-D99ECFC98C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1711B6A3-51AA-4167-859D-DCC16152CFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1711B6A3-51AA-4167-859D-DCC16152CFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1711B6A3-51AA-4167-859D-DCC16152CFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1711B6A3-51AA-4167-859D-DCC16152CFCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC5CF0F-8C7E-4B18-93F2-AB785DB7B5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC5CF0F-8C7E-4B18-93F2-AB785DB7B5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC5CF0F-8C7E-4B18-93F2-AB785DB7B5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC5CF0F-8C7E-4B18-93F2-AB785DB7B5F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

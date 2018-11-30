@@ -13,10 +13,7 @@ namespace Gateway
 {
   public class Startup
   {
-    public Startup(IConfiguration configuration)
-    {
-      Configuration = configuration;
-    }
+    public Startup(IConfiguration c) => this.Configuration = c;
 
     public IConfiguration Configuration { get; }
 

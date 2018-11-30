@@ -8,16 +8,16 @@ services:
     image: ${DOCKER_REGISTRY-}greeter
     build:
       context: .
-      dockerfile: C:/src/rdl/xplat-netcore-webassembly/src/02-services/Greeter/Dockerfile
+      dockerfile: Greeter/Dockerfile
 
   sandwichmaker:
     image: ${DOCKER_REGISTRY-}sandwichmaker
     build:
       context: .
-      dockerfile: C:/src/rdl/xplat-netcore-webassembly/src/02-services/SandwichMaker/Dockerfile
+      dockerfile: SandwichMaker/Dockerfile
 
   gateway:
     image: ${DOCKER_REGISTRY-}gateway
     build:
       context: .
-      dockerfile: C:/src/rdl/xplat-netcore-webassembly/src/02-services/Gateway/Dockerfile
+      dockerfile: Gateway/Dockerfile
