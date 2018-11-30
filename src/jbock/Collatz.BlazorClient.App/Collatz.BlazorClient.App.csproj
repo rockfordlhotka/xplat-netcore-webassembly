@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Collatz.Core\Collatz.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\LineChart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -65,29 +65,29 @@
                Scales = new Scales
                {
                    xAxes = new List<Axis>
-                          {
-                                new Axis
-                                {
-                                     Display = "xAxesDisplay",
-                                     ScaleLabel = new ScaleLabel
-                                     {
-                                          Display = ".",
-                                          LabelString = "Position"
-                                     }
-                                }
-                          },
+                    {
+                        new Axis
+                        {
+                            Display = "xAxesDisplay",
+                            ScaleLabel = new ScaleLabel
+                            {
+                                Display = ".",
+                                LabelString = "Position"
+                            }
+                        }
+                    },
                    yAxes = new List<Axis>
-                          {
-                                new Axis
-                                {
-                                     Display = "yAxes",
-                                     ScaleLabel = new ScaleLabel
-                                     {
-                                          Display = "..",
-                                          LabelString = "Value"
-                                     }
-                                }
-                          }
+                    {
+                        new Axis
+                        {
+                            Display = "yAxes",
+                            ScaleLabel = new ScaleLabel
+                            {
+                                Display = "..",
+                                LabelString = "Value"
+                            }
+                        }
+                    }
                },
                Hover = new LineChartOptionsHover
                {
@@ -106,6 +106,11 @@
        bingDirectionsUrl = $"https://www.bing.com/maps/directions?cp={location.Latitude}~-{location.Longitude}&amp;sty=r&amp;lvl=11&amp;rtp=~pos.{location.Latitude}_{location.Longitude}____&amp;FORM=MBEDLD";
    }
 
+   protected override void OnAfterRender()
+   {
+       lineChartJs.Reload();
+   }
+
    void CalculateSequence()
    {
        if (BigInteger.TryParse(value, out var number))
@@ -115,19 +120,19 @@
            lineChartConfig.Data = new LineChartData
            {
                Datasets = new List<LineChartDataset>
-            {
-                new LineChartDataset
                 {
-                    BackgroundColor = "#ff6384",
-                    BorderColor = "#ff6384",
-                    Fill = false,
-                    Label = "Value",
-                    BorderWidth = 2,
-                    PointRadius = 3,
-                    PointBorderWidth = 1,
-                    Data = sequence.Select(_ => (object)_).ToList()
-                }
-            },
+                    new LineChartDataset
+                    {
+                        BackgroundColor = "#ff6384",
+                        BorderColor = "#ff6384",
+                        Fill = false,
+                        Label = "Value",
+                        BorderWidth = 2,
+                        PointRadius = 3,
+                        PointBorderWidth = 1,
+                        Data = sequence.Select(_ => (object)(int)_).ToList()
+                    }
+                },
                Labels = Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()).ToList()
            };
            lineChartJs.Reload();
