@@ -42,12 +42,13 @@
    {
        lineChartConfig = lineChartConfig ?? new LineChartConfig
        {
+           CanvasId = "CollatzChart",
            Options = new LineChartOptions
            {
-               Text = "Collatz Plot",
+               Text = "Sequence",
                Display = true,
                Responsive = true,
-               Title = new OptionsTitle { Display = true, Text = "Collatz Plot" },
+               Title = new OptionsTitle { Display = true, Text = "Sequence" },
                Legend = new Legend
                {
                    Position = LegendPosition.BOTTOM.ToString(),
@@ -64,28 +65,29 @@
                Scales = new Scales
                {
                    xAxes = new List<Axis>
-        {
-            new Axis
-            {
-                    Display = "xAxesDisplay",
-                    ScaleLabel = new ScaleLabel
-                    {
-                        Display = "."
-                    }
-            }
-        },
+                          {
+                                new Axis
+                                {
+                                     Display = "xAxesDisplay",
+                                     ScaleLabel = new ScaleLabel
+                                     {
+                                          Display = ".",
+                                          LabelString = "Position"
+                                     }
+                                }
+                          },
                    yAxes = new List<Axis>
-        {
-            new Axis
-            {
-                    Display = "yAxes",
-                    ScaleLabel = new ScaleLabel
-                    {
-                        Display = "..",
-                        LabelString = "Value"
-                    }
-            }
-        }
+                          {
+                                new Axis
+                                {
+                                     Display = "yAxes",
+                                     ScaleLabel = new ScaleLabel
+                                     {
+                                          Display = "..",
+                                          LabelString = "Value"
+                                     }
+                                }
+                          }
                },
                Hover = new LineChartOptionsHover
                {
@@ -113,18 +115,19 @@
            lineChartConfig.Data = new LineChartData
            {
                Datasets = new List<LineChartDataset>
+            {
+                new LineChartDataset
                 {
-                    new LineChartDataset
-                    {
-                        BackgroundColor = "#ff6384",
-                        BorderColor = "#ff6384",
-                        Fill = false,
-                        BorderWidth = 2,
-                        PointRadius = 3,
-                        PointBorderWidth = 1,
-                        Data = sequence.Select(_ => (object)_).ToList()
-                    }
-                },
+                    BackgroundColor = "#ff6384",
+                    BorderColor = "#ff6384",
+                    Fill = false,
+                    Label = "Value",
+                    BorderWidth = 2,
+                    PointRadius = 3,
+                    PointBorderWidth = 1,
+                    Data = sequence.Select(_ => (object)_).ToList()
+                }
+            },
                Labels = Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()).ToList()
            };
            lineChartJs.Reload();
