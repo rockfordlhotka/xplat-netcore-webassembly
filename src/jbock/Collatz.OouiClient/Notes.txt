@@ -1,0 +1,1 @@
+﻿Run: dotnet serve -p 8000 -d bin/Release/netcoreapp2.1/dist
