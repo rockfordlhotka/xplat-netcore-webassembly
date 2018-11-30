@@ -9,7 +9,7 @@ namespace Collatz.OouiClient
 		static void Main()
 		{
 			var title = new Heading("Collatz.Ooui");
-			var input = new Input(InputType.Number);
+			var input = new Input();
 			var button = new Button("Calculate");
 			var result = new Div();
 
@@ -18,7 +18,8 @@ namespace Collatz.OouiClient
 				if (BigInteger.TryParse(input.Value, out var start))
 				{
 					var sequence = new CollatzSequence(start);
-					result.Text = string.Join(", ", sequence.Sequence);
+					//result.Text = string.Join(", ", sequence.Sequence);
+					result.Text = start.ToString();
 				}
 				else
 				{
