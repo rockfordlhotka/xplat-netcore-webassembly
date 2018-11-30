@@ -4,6 +4,7 @@ WORKDIR /app
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
 COPY SandwichMaker/SandwichMaker.csproj SandwichMaker/
+COPY RabbitQueue/RabbitQueue.csproj RabbitQueue/
 RUN dotnet restore SandwichMaker/SandwichMaker.csproj
 COPY . .
 WORKDIR /src/SandwichMaker

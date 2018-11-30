@@ -1,23 +1,45 @@
 version: '3.4'
 
-# use of absolute paths here is a workaround for a bug in the current version of
-# Docker for Windows (as of 28 Nov 2018)
-
 services:
   greeter:
     image: ${DOCKER_REGISTRY-}greeter
     build:
       context: .
-      dockerfile: E:/src/rdl/xplat-netcore-webassembly/src/02-services/Greeter/Dockerfile
+      dockerfile: Greeter/Dockerfile
 
   sandwichmaker:
     image: ${DOCKER_REGISTRY-}sandwichmaker
     build:
       context: .
-      dockerfile: E:/src/rdl/xplat-netcore-webassembly/src/02-services/SandwichMaker/Dockerfile
+      dockerfile: SandwichMaker/Dockerfile
 
   gateway:
     image: ${DOCKER_REGISTRY-}gateway
     build:
       context: .
-      dockerfile: E:/src/rdl/xplat-netcore-webassembly/src/02-services/Gateway/Dockerfile
+      dockerfile: Gateway/Dockerfile
+
+  meatservice:
+    image: ${DOCKER_REGISTRY-}meatservice
+    build:
+      context: .
+      dockerfile: MeatService/Dockerfile
+
+  breadservice:
+    image: ${DOCKER_REGISTRY-}breadservice
+    build:
+      context: .
+      dockerfile: BreadService/Dockerfile
+
+  cheeseservice:
+    image: ${DOCKER_REGISTRY-}cheeseservice
+    build:
+      context: .
+      dockerfile: CheeseService/Dockerfile
+
+  lettuceservice:
+    image: ${DOCKER_REGISTRY-}lettuceservice
+    build:
+      context: .
+      dockerfile: LettuceService/Dockerfile
+

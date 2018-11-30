@@ -8,16 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Csla.Configuration;
 
 namespace Gateway
 {
   public class Startup
   {
-    public Startup(IConfiguration configuration)
-    {
-      Configuration = configuration;
-    }
+    public Startup(IConfiguration c) => this.Configuration = c;
 
     public IConfiguration Configuration { get; }
 
@@ -33,8 +29,6 @@ namespace Gateway
 
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-      services.AddCsla();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,8 +47,6 @@ namespace Gateway
       app.UseCookiePolicy();
 
       app.UseMvc();
-
-      Configuration.ConfigureCsla();
     }
   }
 }

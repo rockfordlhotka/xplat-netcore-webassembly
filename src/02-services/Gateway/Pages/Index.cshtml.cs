@@ -1,12 +1,11 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RabbitQueue;
 
 namespace Gateway.Pages
 {
@@ -15,7 +14,7 @@ namespace Gateway.Pages
     private static IConnection connection;
 
     [BindProperty]
-      public string UserInput { get; set; }
+    public string UserInput { get; set; }
 
     [BindProperty]
     public string ReplyText { get; set; }
