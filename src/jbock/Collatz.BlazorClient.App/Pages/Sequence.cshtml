@@ -130,7 +130,7 @@
                         BorderWidth = 2,
                         PointRadius = 3,
                         PointBorderWidth = 1,
-                        Data = sequence.Select(_ => (object)(int)_).ToList()
+                        Data = sequence.Select(_ => (object)(ulong)_).ToList()
                     }
                 },
                Labels = Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()).ToList()
