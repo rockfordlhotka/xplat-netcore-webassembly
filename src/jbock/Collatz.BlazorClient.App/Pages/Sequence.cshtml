@@ -133,7 +133,7 @@
                         Data = sequence.Select(_ => (object)(ulong)_).ToList()
                     }
                 },
-               Labels = Enumerable.Range(1, sequence.Length + 1).Select(_ => _.ToString()).ToList()
+               Labels = Enumerable.Range(1, sequence.Length).Select(_ => _.ToString()).ToList()
            };
            lineChartJs.Reload();
        }

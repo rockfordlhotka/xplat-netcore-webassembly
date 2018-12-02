@@ -1,0 +1,1 @@
+﻿In Ubuntu, need to run this: sudo apt-get install libncurses5-dev
