@@ -57,14 +57,23 @@ namespace Gateway.Pages
     {
       using (var channel = connection.CreateModel())
       {
-        channel.QueueDeclare(queue: "greeter", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(
+          queue: "greeter", 
+          durable: false, 
+          exclusive: false, 
+          autoDelete: false, 
+          arguments: null);
 
         var body = Encoding.UTF8.GetBytes(message);
 
         var props = channel.CreateBasicProperties();
         props.ReplyTo = "gateway";
         props.CorrelationId = Guid.NewGuid().ToString();
-        channel.BasicPublish(exchange: "", routingKey: "greeter", basicProperties: props, body: body);
+        channel.BasicPublish(
+          exchange: "", 
+          routingKey: "greeter", 
+          basicProperties: props, 
+          body: body);
       }
     }
   }
