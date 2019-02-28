@@ -23,7 +23,7 @@ namespace Gateway.Pages
     {
       if (connection == null)
       {
-        var factory = new ConnectionFactory() { HostName = "40.117.117.72" };
+        var factory = new ConnectionFactory() { HostName = "dinky-wallaby-rabbitmq.default.svc.cluster.local" };
         connection = factory.CreateConnection();
       }
     }

@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: azrdlkube.azurecr.io/gateway:v1
+        image: rdlk8s.azurecr.io/gateway:v1

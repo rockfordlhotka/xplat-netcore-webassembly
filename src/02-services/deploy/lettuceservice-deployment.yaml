@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: lettuceservice
-        image: azrdlkube.azurecr.io/lettuceservice:v1
+        image: rdlk8s.azurecr.io/lettuceservice:v1

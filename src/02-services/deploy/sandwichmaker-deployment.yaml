@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: sandwichmaker
-        image: azrdlkube.azurecr.io/sandwichmaker:v1
+        image: rdlk8s.azurecr.io/sandwichmaker:v1

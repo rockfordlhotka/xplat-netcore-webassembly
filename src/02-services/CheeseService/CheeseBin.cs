@@ -9,7 +9,7 @@ namespace CheeseService
 {
   class CheeseBin
   {
-    private static Queue _queue = new Queue("40.117.117.72", "cheesebin");
+    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "cheesebin");
 
     static async Task Main(string[] args)
     {

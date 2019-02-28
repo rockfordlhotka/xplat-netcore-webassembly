@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: meatservice
-        image: azrdlkube.azurecr.io/meatservice:v1
+        image: rdlk8s.azurecr.io/meatservice:v1

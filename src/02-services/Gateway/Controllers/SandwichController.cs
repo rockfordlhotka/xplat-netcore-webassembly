@@ -23,7 +23,7 @@ namespace Gateway.Controllers
     public async Task<Messages.SandwichReponse> OnPut(Messages.SandwichRequest request)
     {
       var result = new Messages.SandwichReponse();
-      using (var _queue = new Queue("40.117.117.72", "customer"))
+      using (var _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "customer"))
       {
         var reset = new AsyncManualResetEvent();
         _queue.StartListening((ea, message) =>

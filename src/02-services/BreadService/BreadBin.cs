@@ -9,7 +9,7 @@ namespace BreadService
 {
   class BreadBin
   {
-    private static Queue _queue = new Queue("40.117.117.72", "breadbin");
+    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "breadbin");
 
     static async Task Main(string[] args)
     {

@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: cheeseservice
-        image: azrdlkube.azurecr.io/cheeseservice:v1
+        image: rdlk8s.azurecr.io/cheeseservice:v1

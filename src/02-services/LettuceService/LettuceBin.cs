@@ -9,7 +9,7 @@ namespace LettuceService
 {
   class LettuceBin
   {
-    private static Queue _queue = new Queue("40.117.117.72", "lettucebin");
+    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "lettucebin");
 
     static async Task Main(string[] args)
     {

@@ -12,7 +12,7 @@ namespace Greeter
     static void Main(string[] args)
     {
       Console.WriteLine("Greeter starting to listen");
-      var factory = new ConnectionFactory() { HostName = "40.117.117.72" };
+      var factory = new ConnectionFactory() { HostName = "dinky-wallaby-rabbitmq.default.svc.cluster.local" };
       connection = factory.CreateConnection();
       using (var channel = connection.CreateModel())
       {

@@ -10,7 +10,7 @@ namespace SandwichMaker
 {
 	 class SandwichMaker
 	 {
-    private static Queue _queue = new Queue("40.117.117.72", "sandwichmaker");
+    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "sandwichmaker");
     private static readonly Dictionary<string, SandwichInProgress> _workInProgress =
       new Dictionary<string, SandwichInProgress>();
 

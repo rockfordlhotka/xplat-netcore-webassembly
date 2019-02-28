@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: breadservice
-        image: azrdlkube.azurecr.io/breadservice:v1
+        image: rdlk8s.azurecr.io/breadservice:v1

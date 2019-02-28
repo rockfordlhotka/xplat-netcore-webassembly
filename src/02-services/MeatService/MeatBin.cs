@@ -9,7 +9,7 @@ namespace MeatService
 {
   class MeatBin
   {
-    private static Queue _queue = new Queue("40.117.117.72", "meatbin");
+    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "meatbin");
 
     static async Task Main(string[] args)
     {
