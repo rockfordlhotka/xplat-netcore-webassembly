@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: sandwichmaker
 spec:
   selector:
     matchLabels:
-      app: gateway
+      app: sandwichmaker
   replicas: 1
   strategy:
     rollingUpdate:
@@ -16,8 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        app: gateway
+        app: sandwichmaker
     spec:
       containers:
-      - name: gateway
-        image: rdlk8s.azurecr.io/gateway:v1
+      - name: sandwichmaker
+        image: azrdlkube.azurecr.io/sandwichmaker:v1

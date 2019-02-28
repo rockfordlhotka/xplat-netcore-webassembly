@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cheeseservice
+  name: lettuceservice
 spec:
   selector:
     matchLabels:
-      app: cheeseservice
+      app: lettuceservice
   replicas: 1
   strategy:
     rollingUpdate:
@@ -16,8 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        app: cheeseservice
+        app: lettuceservice
     spec:
       containers:
-      - name: cheeseservice
-        image: rdlk8s.azurecr.io/cheeseservice:v1
+      - name: lettuceservice
+        image: azrdlkube.azurecr.io/lettuceservice:v1

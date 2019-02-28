@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lettuceservice
+  name: greeter
 spec:
   selector:
     matchLabels:
-      app: lettuceservice
+      app: greeter
   replicas: 1
   strategy:
     rollingUpdate:
@@ -16,8 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        app: lettuceservice
+        app: greeter
     spec:
       containers:
-      - name: lettuceservice
-        image: rdlk8s.azurecr.io/lettuceservice:v1
+      - name: greeter
+        image: azrdlkube.azurecr.io/greeter:v1
