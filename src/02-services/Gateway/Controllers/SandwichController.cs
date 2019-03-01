@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitQueue;
 
@@ -13,6 +14,13 @@ namespace Gateway.Controllers
   [ApiController]
   public class SandwichController : ControllerBase
   {
+    readonly IConfiguration _config;
+
+    public SandwichController(IConfiguration config)
+    {
+      _config = config;
+    }
+
     [HttpGet]
     public string OnGet()
     {
@@ -23,7 +31,7 @@ namespace Gateway.Controllers
     public async Task<Messages.SandwichReponse> OnPut(Messages.SandwichRequest request)
     {
       var result = new Messages.SandwichReponse();
-      using (var _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "customer"))
+      using (var _queue = new Queue(_config["rabbitmq:url"], "customer"))
       {
         var reset = new AsyncManualResetEvent();
         _queue.StartListening((ea, message) =>
