@@ -29,3 +29,4 @@ I assume you have Docker for Windows (or Mac) already installed.
     1. Open the ServicesDemo solution in Visual Studio 2017 or higher
     1. Edit the docker-compose.yml file and replace the IP address in all `- RABBITMQ__URL=172.25.0.2` lines with your new rabbitmq IP address
     1. _Optional_: Notice the 'networks:' section and that it uses the `demonet` network - if you change network names make sure to update this as well
+    
