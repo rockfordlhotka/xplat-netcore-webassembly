@@ -1,11 +1,20 @@
 version: '3.4'
 
+networks:
+  default:
+    external:
+      name: demonet
+
 services:
   greeter:
     image: ${DOCKER_REGISTRY-}greeter
     build:
       context: .
       dockerfile: Greeter/Dockerfile
+    environment: 
+      - RABBITMQ__URL=172.25.0.2
+      - RABBITMQ__USER
+      - RABBITMQ__PASSWORD
 
   sandwichmaker:
     image: ${DOCKER_REGISTRY-}sandwichmaker
@@ -13,7 +22,7 @@ services:
       context: .
       dockerfile: SandwichMaker/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
@@ -23,7 +32,7 @@ services:
       context: .
       dockerfile: Gateway/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
@@ -33,7 +42,7 @@ services:
       context: .
       dockerfile: MeatService/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
@@ -43,7 +52,7 @@ services:
       context: .
       dockerfile: BreadService/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
@@ -53,7 +62,7 @@ services:
       context: .
       dockerfile: CheeseService/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
@@ -63,7 +72,7 @@ services:
       context: .
       dockerfile: LettuceService/Dockerfile
     environment: 
-      - RABBITMQ__URL=localhost
+      - RABBITMQ__URL=172.25.0.2
       - RABBITMQ__USER
       - RABBITMQ__PASSWORD
 
