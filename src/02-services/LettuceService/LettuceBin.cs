@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using RabbitQueue;
 using System;
@@ -9,10 +10,17 @@ namespace LettuceService
 {
   class LettuceBin
   {
-    private static Queue _queue = new Queue("dinky-wallaby-rabbitmq.default.svc.cluster.local", "lettucebin");
+    private static Queue _queue;
 
     static async Task Main(string[] args)
     {
+      var config = new ConfigurationBuilder()
+        .AddEnvironmentVariables()
+        .Build();
+
+      if (_queue == null)
+        _queue = new Queue(config["rabbitmq:url"], "lettucebin");
+
       Console.WriteLine("### Lettuce bin service starting to listen");
       _queue.StartListening(HandleMessage);
 
