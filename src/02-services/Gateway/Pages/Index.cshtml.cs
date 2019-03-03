@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RabbitQueue;
+using Microsoft.Extensions.Configuration;
 
 namespace Gateway.Pages
 {
   public class IndexModel : PageModel
   {
+    readonly IConfiguration _config;
+
+    public IndexModel(IConfiguration config)
+    {
+      _config = config;
+    }
+
     private static IConnection connection;
 
     [BindProperty]
@@ -23,7 +31,7 @@ namespace Gateway.Pages
     {
       if (connection == null)
       {
-        var factory = new ConnectionFactory() { HostName = "40.117.117.72" };
+        var factory = new ConnectionFactory() { HostName = _config["rabbitmq:url"] };
         connection = factory.CreateConnection();
       }
     }
@@ -57,14 +65,23 @@ namespace Gateway.Pages
     {
       using (var channel = connection.CreateModel())
       {
-        channel.QueueDeclare(queue: "greeter", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(
+          queue: "greeter", 
+          durable: false, 
+          exclusive: false, 
+          autoDelete: false, 
+          arguments: null);
 
         var body = Encoding.UTF8.GetBytes(message);
 
         var props = channel.CreateBasicProperties();
         props.ReplyTo = "gateway";
         props.CorrelationId = Guid.NewGuid().ToString();
-        channel.BasicPublish(exchange: "", routingKey: "greeter", basicProperties: props, body: body);
+        channel.BasicPublish(
+          exchange: "", 
+          routingKey: "greeter", 
+          basicProperties: props, 
+          body: body);
       }
     }
   }

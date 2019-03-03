@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meatservice
+  name: gateway
 spec:
   selector:
     matchLabels:
-      app: meatservice
+      app: gateway
   replicas: 1
   strategy:
     rollingUpdate:
@@ -16,8 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        app: meatservice
+        app: gateway
     spec:
       containers:
-      - name: meatservice
-        image: rdlk8s.azurecr.io/meatservice:v1
+      - name: gateway
+        image: rdlk8s.azurecr.io/gateway:v1

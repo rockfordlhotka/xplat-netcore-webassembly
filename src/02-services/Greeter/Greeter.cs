@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
@@ -11,8 +12,12 @@ namespace Greeter
 
     static void Main(string[] args)
     {
+      var config = new ConfigurationBuilder()
+        .AddEnvironmentVariables()
+        .Build();
+
       Console.WriteLine("Greeter starting to listen");
-      var factory = new ConnectionFactory() { HostName = "40.117.117.72" };
+      var factory = new ConnectionFactory() { HostName = config["rabbitmq:url"] };
       connection = factory.CreateConnection();
       using (var channel = connection.CreateModel())
       {

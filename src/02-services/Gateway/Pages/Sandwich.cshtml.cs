@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitQueue;
 
@@ -11,6 +12,13 @@ namespace Gateway.Pages
 {
   public class SandwichModel : PageModel
   {
+    readonly IConfiguration _config;
+
+    public SandwichModel(IConfiguration config)
+    {
+      _config = config;
+    }
+
     [BindProperty]
     public string TheMeat { get; set; }
     [BindProperty]
@@ -32,7 +40,7 @@ namespace Gateway.Pages
 
     public async Task OnPost()
     {
-      using (var _queue = new Queue("40.117.117.72", "customer"))
+      using (var _queue = new Queue(_config["rabbitmq:url"], "customer"))
       {
         var reset = new AsyncManualResetEvent();
         _queue.StartListening((ea, message) =>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using RabbitQueue;
@@ -10,12 +11,19 @@ namespace SandwichMaker
 {
 	 class SandwichMaker
 	 {
-    private static Queue _queue = new Queue("40.117.117.72", "sandwichmaker");
+    private static Queue _queue;
     private static readonly Dictionary<string, SandwichInProgress> _workInProgress =
       new Dictionary<string, SandwichInProgress>();
 
     static async Task Main(string[] args)
     {
+      var config = new ConfigurationBuilder()
+        .AddEnvironmentVariables()
+        .Build();
+
+      if (_queue == null)
+        _queue = new Queue(config["rabbitmq:url"], "sandwichmaker");
+
       Console.WriteLine("### SandwichMaker starting to listen");
       _queue.StartListening(HandleMessage);
 
