@@ -72,7 +72,7 @@ Run Collatz.BlazorClient.Server. If you want it all in the client, change the bl
 This is a demo app from Microsoft, you can find it [here](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/FlightFinder). Another demo that I don't show but is very good is [Blazing Pizza](https://github.com/dotnet-presentations/blazor-workshop).
 
 ### Avalonia
-Run 
+Run `Collatz.AvaloniaClient`.
 
 ### gui.cs
 This is a fun one. Just run it, and you'll get what looks like an old-school terminal UI.
