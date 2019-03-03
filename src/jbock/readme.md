@@ -12,9 +12,9 @@ This is a .NET Core 2.1 project that has some tests for `Collatz.Core`. [NUnit](
 
 ### Collatz.API
 This is an ASP.NET Core 2.1 project that hosts a REST API. It uses:
-*[Swagger](https://swagger.io/) to document and run the APIs. 
-*[Autofac](https://autofac.org/) for dependency injection
-*[Serilog](https://serilog.net/) for logging
+* [Swagger](https://swagger.io/) to document and run the APIs. 
+* [Autofac](https://autofac.org/) for dependency injection
+* [Serilog](https://serilog.net/) for logging
 
 ### Collatz.API.Tests
 This contains controller tests for `Collatz.API`.
