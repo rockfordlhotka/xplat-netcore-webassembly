@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meatservice
+  name: breadservice
 spec:
   selector:
     matchLabels:
-      app: meatservice
+      app: breadservice
   replicas: 1
   strategy:
     rollingUpdate:
@@ -15,8 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: meatservice
+        app: breadservice
     spec:
       containers:
-      - name: meatservice
-        image: rdlk8s.azurecr.io/meatservice:v1
+      - name: breadservice
+        image: rdlk8s.azurecr.io/breadservice:v1
+        env:
+        - name: RABBITMQ__URL
+          value: dinky-wallaby-rabbitmq

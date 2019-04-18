@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker push rdlk8s.azurecr.io/gateway:v1
 docker push rdlk8s.azurecr.io/cheeseservice:v1
 docker push rdlk8s.azurecr.io/lettuceservice:v1
