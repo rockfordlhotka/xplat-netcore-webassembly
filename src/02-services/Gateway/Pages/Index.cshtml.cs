@@ -47,7 +47,7 @@ namespace Gateway.Pages
       var resetEvent = new AsyncManualResetEvent();
       using (var channel = connection.CreateModel())
       {
-        channel.QueueDeclare(queue: "gateway", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(queue: "webUI", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += (model, ea) =>
@@ -56,7 +56,7 @@ namespace Gateway.Pages
           ReplyText = message;
           resetEvent.Set();
         };
-        channel.BasicConsume(queue: "gateway", autoAck: true, consumer: consumer);
+        channel.BasicConsume(queue: "webUI", autoAck: true, consumer: consumer);
         await resetEvent.WaitAsync();
       }
     }
@@ -75,7 +75,7 @@ namespace Gateway.Pages
         var body = Encoding.UTF8.GetBytes(message);
 
         var props = channel.CreateBasicProperties();
-        props.ReplyTo = "gateway";
+        props.ReplyTo = "webUI";
         props.CorrelationId = Guid.NewGuid().ToString();
         channel.BasicPublish(
           exchange: "", 

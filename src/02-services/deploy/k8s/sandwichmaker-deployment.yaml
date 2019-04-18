@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: greeter
+  name: sandwichmaker
 spec:
   selector:
     matchLabels:
-      app: greeter
+      app: sandwichmaker
   replicas: 1
   strategy:
     rollingUpdate:
@@ -15,8 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: greeter
+        app: sandwichmaker
     spec:
       containers:
-      - name: greeter
-        image: rdlk8s.azurecr.io/greeter:v1
+      - name: sandwichmaker
+        image: rdlk8s.azurecr.io/sandwichmaker:v1
+        env:
+        - name: RABBITMQ__URL
+          value: dinky-wallaby-rabbitmq

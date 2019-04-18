@@ -11,8 +11,8 @@ namespace RabbitQueue
   /// </summary>
   public class Queue : IDisposable
   {
-    private IConnection connection;
-    private IModel channel;
+    private readonly IConnection connection;
+    private readonly IModel channel;
     private readonly string serviceName;
 
     public Queue(string hostName, string serviceName)

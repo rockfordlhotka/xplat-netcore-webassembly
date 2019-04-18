@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lettuceservice
+  name: cheeseservice
 spec:
   selector:
     matchLabels:
-      app: lettuceservice
+      app: cheeseservice
   replicas: 1
   strategy:
     rollingUpdate:
@@ -15,8 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: lettuceservice
+        app: cheeseservice
     spec:
       containers:
-      - name: lettuceservice
-        image: rdlk8s.azurecr.io/lettuceservice:v1
+      - name: cheeseservice
+        image: rdlk8s.azurecr.io/cheeseservice:v1
+        env:
+        - name: RABBITMQ__URL
+          value: dinky-wallaby-rabbitmq
