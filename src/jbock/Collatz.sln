@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.GuiClient", "Collat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.WebAssembly", "Collatz.WebAssembly\Collatz.WebAssembly.csproj", "{B6F15004-C803-449B-8824-AF4758A91FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Server", "Collatz.Server\Collatz.Server.csproj", "{B14E460F-AF70-47A3-BD9F-70416C3EE008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Server", "Collatz.Server\Collatz.Server.csproj", "{B14E460F-AF70-47A3-BD9F-70416C3EE008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Client", "Collatz.Client\Collatz.Client.csproj", "{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Client", "Collatz.Client\Collatz.Client.csproj", "{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.AvaloniaClient", "Collatz.AvaloniaClient\Collatz.AvaloniaClient.csproj", "{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
