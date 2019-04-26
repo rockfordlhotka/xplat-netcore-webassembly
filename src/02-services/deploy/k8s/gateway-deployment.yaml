@@ -20,3 +20,6 @@ spec:
       containers:
       - name: gateway
         image: rdlk8s.azurecr.io/gateway:v1
+        env:
+        - name: RABBITMQ__URL
+          value: dinky-wallaby-rabbitmq
