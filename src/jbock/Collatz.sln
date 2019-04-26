@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Core", "Collatz.Core\Collatz.Core.csproj", "{B9F9C883-A62E-4566-808A-0EC2BE3E16EB}"
 EndProject
@@ -15,15 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Api.Client", "Colla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.GuiClient", "Collatz.GuiClient\Collatz.GuiClient.csproj", "{E0E583DF-540E-423D-8DD2-F336C9508376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.AvaloniaClient", "Collatz.AvaloniaClient\Collatz.AvaloniaClient.csproj", "{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.WebAssembly", "Collatz.WebAssembly\Collatz.WebAssembly.csproj", "{B6F15004-C803-449B-8824-AF4758A91FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.BlazorClient.Server", "Collatz.BlazorClient.Server\Collatz.BlazorClient.Server.csproj", "{13902FB6-A3B5-450D-8740-CB0C88BB2900}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Server", "Collatz.Server\Collatz.Server.csproj", "{B14E460F-AF70-47A3-BD9F-70416C3EE008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.BlazorClient.App", "Collatz.BlazorClient.App\Collatz.BlazorClient.App.csproj", "{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.WebAssembly", "Collatz.WebAssembly\Collatz.WebAssembly.csproj", "{B6F15004-C803-449B-8824-AF4758A91FBC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.OouiClient", "Collatz.OouiClient\Collatz.OouiClient.csproj", "{7B22724E-0A40-4D94-84D1-DB2ACD63FE88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Client", "Collatz.Client\Collatz.Client.csproj", "{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,26 +51,18 @@ Global
 		{E0E583DF-540E-423D-8DD2-F336C9508376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0E583DF-540E-423D-8DD2-F336C9508376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0E583DF-540E-423D-8DD2-F336C9508376}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAB200A1-1606-4E9A-BC9A-E727A387BDA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13902FB6-A3B5-450D-8740-CB0C88BB2900}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DA81222-A5F1-4F3E-BED4-B3959D6525C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6F15004-C803-449B-8824-AF4758A91FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6F15004-C803-449B-8824-AF4758A91FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6F15004-C803-449B-8824-AF4758A91FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6F15004-C803-449B-8824-AF4758A91FBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B22724E-0A40-4D94-84D1-DB2ACD63FE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B22724E-0A40-4D94-84D1-DB2ACD63FE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B22724E-0A40-4D94-84D1-DB2ACD63FE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B22724E-0A40-4D94-84D1-DB2ACD63FE88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14E460F-AF70-47A3-BD9F-70416C3EE008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14E460F-AF70-47A3-BD9F-70416C3EE008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14E460F-AF70-47A3-BD9F-70416C3EE008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14E460F-AF70-47A3-BD9F-70416C3EE008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC6CBD3-4EB3-4A65-A722-8CBB147E97D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

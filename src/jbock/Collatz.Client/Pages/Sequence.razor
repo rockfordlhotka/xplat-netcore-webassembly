@@ -1,0 +1,108 @@
+﻿@using Collatz.Core
+@using System.Numerics
+@using Telerik.Blazor
+@using Telerik.Blazor.Components.Chart
+
+@page "/sequence"
+
+@inject IJSRuntime JSRuntime
+
+<h1>Sequence</h1>
+
+<p>Calculations are being made at:</p>
+<ul>
+    <li>Latitude: @this.latitude</li>
+    <li>Longitude: @this.longitude</li>
+    <li>Accuracy: @this.accuracy (in meters)</li>
+</ul>
+<!--From https://www.bing.com/maps/embed-a-map-->
+<div>
+    <iframe width="500" height="400" frameborder="0" src="@this.bingMainUrl" scrolling="no"></iframe>
+    <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+        <a id="largeMapLink" href="@this.bingLargeMapUrl" target="_blank">View Larger Map</a> &nbsp; | &nbsp;
+        <a id="dirMapLink" href="@this.bingDirectionsUrl" target="_blank">Get Directions</a>
+    </div>
+</div>
+
+<p>Current sequence: @this.currentSequence</p>
+<input type="text" bind="@this.value" />
+<button class="btn btn-primary" onclick="@this.CreateSequence">Create Sequence</button>
+
+<TelerikChart>
+    <TelerikChartSeriesItems>
+        <TelerikChartSeries Type="ChartSeriesType.Line" Name="Values" Style="ChartSeriesStyle.Smooth" Data="@this.sequence" />
+    </TelerikChartSeriesItems>
+
+    <TelerikChartCategoryAxes>
+        <TelerikChartCategoryAxis Categories="@this.labels" />
+    </TelerikChartCategoryAxes>
+
+    <TelerikChartTitle Text="Current Sequence" />
+
+    <TelerikChartLegend Position="ChartLegendPosition.Right" />
+</TelerikChart>
+
+<canvas id=@CollatzChartId width="400" height="400"></canvas>
+
+@functions {
+    const string CollatzChartId = "collatzChart";
+    string value = string.Empty;
+    string currentSequence = string.Empty;
+    string bingMainUrl = default;
+    string bingLargeMapUrl = default;
+    string bingDirectionsUrl = default;
+    double latitude = default;
+    double longitude = default;
+    double accuracy = default;
+    List<object> sequence = default;
+    string[] labels = default;
+
+    [JSInvokable]
+    public void Change(double latitude, double longitude, double accuracy)
+    {
+        (this.latitude, this.longitude, this.accuracy) = (latitude, longitude, accuracy);
+        this.bingMainUrl = $"https://www.bing.com/maps/embed?h=400&w=500&cp={latitude}~{longitude}&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8";
+        this.bingLargeMapUrl = $"https://www.bing.com/maps?cp={latitude}~{longitude}&amp;sty=r&amp;lvl=11&amp;FORM=MBEDLD";
+        this.bingDirectionsUrl = $"https://www.bing.com/maps/directions?cp={latitude}~-{longitude}&amp;sty=r&amp;lvl=11&amp;rtp=~pos.{latitude}_{longitude}____&amp;FORM=MBEDLD";
+        this.StateHasChanged();
+    }
+
+    protected override async Task OnInitAsync()
+    {
+        await JSRuntime.InvokeAsync<object>(
+           "getGeolocation", new DotNetObjectRef(this));
+    }
+
+    async void CreateSequence()
+    {
+        if (BigInteger.TryParse(this.value, out var value))
+        {
+            try
+            {
+                var sequence = new CollatzSequence(value);
+                this.currentSequence = string.Join(", ", sequence.Sequence);
+                this.sequence = sequence.Sequence.Select(_ => (object)(int)_).ToList();
+                this.labels = Enumerable.Range(1, sequence.Sequence.Length).Select(_ => _.ToString()).ToArray();
+                this.StateHasChanged();
+                await this.JSRuntime.InvokeAsync<object>("updateChart", CollatzChartId,
+                   sequence.Sequence.Select(_ => (int)_).ToArray(), this.labels);
+            }
+            catch (ArgumentException)
+            {
+                this.currentSequence = $"The value, {value}, is incorrect.";
+                this.sequence = default;
+                this.labels = Array.Empty<string>();
+                await this.JSRuntime.InvokeAsync<object>("updateChart", CollatzChartId, Array.Empty<int>(), Array.Empty<string>());
+                this.StateHasChanged();
+            }
+        }
+        else
+        {
+            this.currentSequence = $"{this.value} is not a valid integer.";
+            this.sequence = default;
+            this.labels = Array.Empty<string>();
+            await this.JSRuntime.InvokeAsync<object>("updateChart", CollatzChartId, Array.Empty<int>(), Array.Empty<string>());
+            this.StateHasChanged();
+        }
+    }
+}
