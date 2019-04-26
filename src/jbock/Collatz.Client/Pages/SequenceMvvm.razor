@@ -1,0 +1,52 @@
+﻿@using Collatz.Client.Mvvm
+@using Telerik.Blazor
+@using Telerik.Blazor.Components.Chart
+
+@page "/sequence-mvvm"
+
+@inject SequenceViewModel ViewModel
+
+<h1>Sequence - MVVM</h1>
+
+<p>Calculations are being made at:</p>
+<ul>
+    <li>Latitude: @this.ViewModel.Latitude</li>
+    <li>Longitude: @this.ViewModel.Longitude</li>
+    <li>Accuracy: @this.ViewModel.Accuracy (in meters)</li>
+</ul>
+<!--From https://www.bing.com/maps/embed-a-map-->
+<div>
+    <iframe width="500" height="400" frameborder="0" src="@this.ViewModel.BingMainUrl" scrolling="no"></iframe>
+    <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+        <a id="largeMapLink" href="@this.ViewModel.BingLargeMapUrl" target="_blank">View Larger Map</a> &nbsp; | &nbsp;
+        <a id="dirMapLink" href="@this.ViewModel.BingDirectionsUrl" target="_blank">Get Directions</a>
+    </div>
+</div>
+
+<p>Current sequence: @this.ViewModel.CurrentSequence</p>
+<input type="text" bind="@this.ViewModel.Value" />
+<button class="btn btn-primary" onclick="@this.ViewModel.CreateSequence">Create Sequence</button>
+
+<TelerikChart>
+    <TelerikChartSeriesItems>
+        <TelerikChartSeries Type="ChartSeriesType.Line" Name="Values" Style="ChartSeriesStyle.Smooth" Data="@this.ViewModel.Sequence" />
+    </TelerikChartSeriesItems>
+
+    <TelerikChartCategoryAxes>
+        <TelerikChartCategoryAxis Categories="@this.ViewModel.Labels" />
+    </TelerikChartCategoryAxes>
+
+    <TelerikChartTitle Text="Current Sequence" />
+
+    <TelerikChartLegend Position="ChartLegendPosition.Right" />
+</TelerikChart>
+
+<canvas id=@this.ViewModel.CollatzChartId></canvas>
+
+@functions {
+   protected override async Task OnInitAsync()
+   {
+       this.ViewModel.Changed += (s, e) => this.StateHasChanged();
+       await this.ViewModel.GetGeolocationAsync();
+   }
+}

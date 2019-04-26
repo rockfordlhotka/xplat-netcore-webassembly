@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Collatz.Api.Logging;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Collatz.Core;
 
