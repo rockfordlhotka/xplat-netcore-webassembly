@@ -45,7 +45,7 @@ namespace Gateway.Pages
         var reset = new AsyncManualResetEvent();
         _queue.StartListening((ea, message) =>
         {
-          var response = JsonConvert.DeserializeObject<Messages.SandwichReponse>(message);
+          var response = JsonConvert.DeserializeObject<Messages.SandwichResponse>(message);
           if (response.Success)
             ReplyText = $"SUCCESS: {response.Description}";
           else

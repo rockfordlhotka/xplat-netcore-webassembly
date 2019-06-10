@@ -28,15 +28,15 @@ namespace Gateway.Controllers
     }
 
     [HttpPut]
-    public async Task<Messages.SandwichReponse> OnPut(Messages.SandwichRequest request)
+    public async Task<Messages.SandwichResponse> OnPut(Messages.SandwichRequest request)
     {
-      var result = new Messages.SandwichReponse();
+      var result = new Messages.SandwichResponse();
       using (var _queue = new Queue(_config["rabbitmq:url"], "customer"))
       {
         var reset = new AsyncManualResetEvent();
         _queue.StartListening((ea, message) =>
         {
-          var response = JsonConvert.DeserializeObject<Messages.SandwichReponse>(message);
+          var response = JsonConvert.DeserializeObject<Messages.SandwichResponse>(message);
           result.Success = response.Success;
           result.Description = $"SUCCESS: {response.Description}";
           result.Error = $"FAILED: {response.Error}";
