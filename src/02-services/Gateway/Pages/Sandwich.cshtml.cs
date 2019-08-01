@@ -40,32 +40,19 @@ namespace Gateway.Pages
 
     public async Task OnPost()
     {
-      using (var _queue = new Queue(_config["rabbitmq:url"], "customer"))
+      var request = new Messages.SandwichRequest
       {
-        var reset = new AsyncManualResetEvent();
-        _queue.StartListening((ea, message) =>
-        {
-          var response = JsonConvert.DeserializeObject<Messages.SandwichResponse>(message);
-          if (response.Success)
-            ReplyText = $"SUCCESS: {response.Description}";
-          else
-            ReplyText = $"FAILED: {response.Error}";
-          reset.Set();
-        });
+        Meat = TheMeat,
+        Bread = TheBread,
+        Cheese = TheCheese,
+        Lettuce = TheLettuce
+      };
+      var result = await Controllers.SandwichController.RequestSandwich(request, _config["rabbitmq:url"]);
 
-        var request = new Messages.SandwichRequest
-        {
-          Meat = TheMeat,
-          Bread = TheBread,
-          Cheese = TheCheese,
-          Lettuce = TheLettuce
-        };
-        _queue.SendMessage("sandwichmaker", Guid.NewGuid().ToString(), request);
-
-        var task = reset.WaitAsync();
-        if (await Task.WhenAny(task, Task.Delay(10000)) != task)
-          ReplyText = "The cook didn't get back to us in time, no sandwich";
-      }
+      if (result.Success)
+        ReplyText = result.Description;
+      else
+        ReplyText = result.Error;
     }
   }
 }

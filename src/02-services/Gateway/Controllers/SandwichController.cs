@@ -24,40 +24,51 @@ namespace Gateway.Controllers
     [HttpGet]
     public string OnGet()
     {
-      return "I am running";
+      return "I am running; use PUT to make a sandwich";
     }
 
     [HttpPut]
     public async Task<Messages.SandwichResponse> OnPut(Messages.SandwichRequest request)
     {
+      return await RequestSandwich(request, _config["rabbitmq:url"]);
+    }
+
+    public static async Task<Messages.SandwichResponse> RequestSandwich(Messages.SandwichRequest request, string queueUrl)
+    {
       var result = new Messages.SandwichResponse();
-      using (var _queue = new Queue(_config["rabbitmq:url"], "customer"))
+      var requestToCook = new Messages.SandwichRequest
       {
-        var reset = new AsyncManualResetEvent();
-        _queue.StartListening((ea, message) =>
+        Meat = request.Meat,
+        Bread = request.Bread,
+        Cheese = request.Cheese,
+        Lettuce = request.Lettuce
+      };
+      var correlationId = Guid.NewGuid().ToString();
+      var wipItem = new Services.WipItem { Lock = new AsyncManualResetEvent() };
+      Services.WorkInProgress.WipList.Add(correlationId, wipItem);
+      try
+      {
+        using (var _queue = new Queue(queueUrl, "customer"))
         {
-          var response = JsonConvert.DeserializeObject<Messages.SandwichResponse>(message);
-          result.Success = response.Success;
-          result.Description = $"SUCCESS: {response.Description}";
-          result.Error = $"FAILED: {response.Error}";
-          reset.Set();
-        });
-
-        var requestToCook = new Messages.SandwichRequest
+          _queue.SendMessage("sandwichmaker", correlationId, requestToCook);
+        }
+        var messageArrived = wipItem.Lock.WaitAsync();
+        if (await Task.WhenAny(messageArrived, Task.Delay(10000)) == messageArrived)
         {
-          Meat = request.Meat,
-          Bread = request.Bread,
-          Cheese = request.Cheese,
-          Lettuce = request.Lettuce
-        };
-        _queue.SendMessage("sandwichmaker", Guid.NewGuid().ToString(), requestToCook);
-
-        var task = reset.WaitAsync();
-        if (await Task.WhenAny(task, Task.Delay(10000)) != task)
+          result = wipItem.Response;
+        }
+        else
+        {
           result.Error = "The cook didn't get back to us in time, no sandwich";
-
-        return result;
+          result.Success = false;
+        }
       }
+      finally
+      {
+        Services.WorkInProgress.WipList.Remove(correlationId);
+      }
+
+      return result;
     }
   }
 }
