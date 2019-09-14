@@ -134,7 +134,7 @@ namespace SandwichMaker
       {
         Console.WriteLine($"### SandwichMaker is done with {wip.CorrelationId}");
         _workInProgress.Remove(wip.CorrelationId);
-        _queue.SendReply(wip.ReplyTo, wip.CorrelationId, new Messages.SandwichReponse
+        _queue.SendReply(wip.ReplyTo, wip.CorrelationId, new Messages.SandwichResponse
         {
           Description = wip.GetDescription(),
           Success = !wip.Failed,

@@ -36,6 +36,7 @@ namespace MeatService
       var response = new Messages.MeatBinResponse();
       lock (_queue)
       {
+        Thread.Sleep(2000);
         if (request.Returning)
         {
           Console.WriteLine($"### Request for {request.GetType().Name} - returned");
