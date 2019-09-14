@@ -1,35 +1,35 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<title>WebAssembly Demo - Collatz With Callback</title>
 	</head>
-	<body>
-		<button onclick='runCollatzClick()'>Run Collatz</button>
-		<script>
-			function runCollatzClick() {
-				results = [];
-				wasmExports.collatz(255);
-				alert(results);
-			}
-		</script>
-	</body>
-	<script>
-		// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-		var results = [];
-		var importObject = { 
-			imports: { 
-				collatzCallback: arg => results.push(arg) 
-			} 
-		};
-		var wasmExports;
+    <body>
+        <div>12, 6, 3, 10, 5, 16, 8, 4, 2, 1</div>
+        <button onclick='runCollatzClick()'>Run Collatz</button>
+        <script>
+            function runCollatzClick() {
+                results = [];
+                wasmExports.collatz(12);
+                alert(results);
+            }
 
-		fetch('collatzWithCallback.wasm')
-			.then(response => response.arrayBuffer())
-			.then(buffer => WebAssembly.instantiate(buffer, importObject))
-			.then(results => 
-				{
-					wasmExports = results.instance.exports;
-				});		
-	</script>
+		    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+		    var results = [];
+		    var importObject = { 
+			    imports: { 
+				    collatzCallback: arg => results.push(arg) 
+			    } 
+		    };
+		    var wasmExports;
+
+		    fetch('collatzWithCallback.wasm')
+			    .then(response => response.arrayBuffer())
+			    .then(buffer => WebAssembly.instantiate(buffer, importObject))
+			    .then(results => 
+				    {
+					    wasmExports = results.instance.exports;
+				    });		
+        </script>
+    </body>
 </html>

@@ -14,7 +14,7 @@ namespace Collatz.Api.Tests.Controllers
 	{
 		[Test]
 		public static void CreateWithNull() =>
-			Assert.That(() => new CollatzController(null), Throws.TypeOf<ArgumentNullException>());
+			Assert.That(() => new CollatzController(null!), Throws.TypeOf<ArgumentNullException>());
 
 		[Test]
 		public static void CalculateWithValue()
@@ -24,7 +24,7 @@ namespace Collatz.Api.Tests.Controllers
 			logger.Handle(_ => _.Log(Arg.IsAny<string>()), 2);
 
 			var controller = new CollatzController(logger.Make());
-			var result = controller.Get(value).Result as OkObjectResult;
+			var result = (OkObjectResult)controller.Get(value).Result;
 			var resultValue = (ImmutableArray<BigInteger>)result.Value;
 
 			Assert.That(result.StatusCode, Is.EqualTo(200));
@@ -46,7 +46,7 @@ namespace Collatz.Api.Tests.Controllers
 			logger.Handle(_ => _.Log(Arg.IsAny<string>()));
 
 			var controller = new CollatzController(logger.Make());
-			var result = controller.Get(value).Result as BadRequestObjectResult;
+			var result = (BadRequestObjectResult)controller.Get(value).Result;
 
 			Assert.That(result.StatusCode, Is.EqualTo(400));
 

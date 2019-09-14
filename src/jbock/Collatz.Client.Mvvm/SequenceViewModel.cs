@@ -17,7 +17,7 @@ namespace Collatz.Client.Mvvm
 
 		public async Task GetGeolocationAsync() =>
 			await this.runtime.InvokeAsync<object>(
-				"getGeolocation", new DotNetObjectRef(this));
+				"getGeolocation", DotNetObjectReference.Create(this));
 
 		[JSInvokable]
 		public void Change(double latitude, double longitude, double accuracy)
@@ -30,7 +30,7 @@ namespace Collatz.Client.Mvvm
 			this.Changed?.Invoke(this, EventArgs.Empty);
 		}
 
-		public async void CreateSequence()
+		public async Task CreateSequence()
 		{
 			if (BigInteger.TryParse(this.Value, out var value))
 			{

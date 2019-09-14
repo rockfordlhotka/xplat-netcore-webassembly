@@ -1,7 +1,5 @@
 ﻿@using Collatz.Core
 @using System.Numerics
-@using Telerik.Blazor
-@using Telerik.Blazor.Components.Chart
 
 @page "/sequence"
 
@@ -25,26 +23,12 @@
 </div>
 
 <p>Current sequence: @this.currentSequence</p>
-<input type="text" bind="@this.value" />
-<button class="btn btn-primary" onclick="@this.CreateSequence">Create Sequence</button>
-
-<TelerikChart>
-    <TelerikChartSeriesItems>
-        <TelerikChartSeries Type="ChartSeriesType.Line" Name="Values" Style="ChartSeriesStyle.Smooth" Data="@this.sequence" />
-    </TelerikChartSeriesItems>
-
-    <TelerikChartCategoryAxes>
-        <TelerikChartCategoryAxis Categories="@this.labels" />
-    </TelerikChartCategoryAxes>
-
-    <TelerikChartTitle Text="Current Sequence" />
-
-    <TelerikChartLegend Position="ChartLegendPosition.Right" />
-</TelerikChart>
+<input type="text" @bind="this.value" />
+<button class="btn btn-primary" @onclick="this.CreateSequence">Create Sequence</button>
 
 <canvas id=@CollatzChartId></canvas>
 
-@functions {
+@code {
     const string CollatzChartId = "collatzChart";
     string value = string.Empty;
     string currentSequence = string.Empty;
@@ -60,20 +44,21 @@
     [JSInvokable]
     public void Change(double latitude, double longitude, double accuracy)
     {
-        (this.latitude, this.longitude, this.accuracy) = (latitude, longitude, accuracy);
+        (this.latitude, this.longitude, this.accuracy) =
+         (latitude, longitude, accuracy);
         this.bingMainUrl = $"https://www.bing.com/maps/embed?h=400&w=500&cp={latitude}~{longitude}&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8";
         this.bingLargeMapUrl = $"https://www.bing.com/maps?cp={latitude}~{longitude}&amp;sty=r&amp;lvl=11&amp;FORM=MBEDLD";
         this.bingDirectionsUrl = $"https://www.bing.com/maps/directions?cp={latitude}~-{longitude}&amp;sty=r&amp;lvl=11&amp;rtp=~pos.{latitude}_{longitude}____&amp;FORM=MBEDLD";
         this.StateHasChanged();
     }
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeAsync<object>(
-           "getGeolocation", new DotNetObjectRef(this));
+           "getGeolocation", DotNetObjectReference.Create(this));
     }
 
-    async void CreateSequence()
+    async Task CreateSequence()
     {
         if (BigInteger.TryParse(this.value, out var value))
         {

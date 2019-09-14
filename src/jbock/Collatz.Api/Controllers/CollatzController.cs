@@ -3,6 +3,7 @@ using Collatz.Api.Logging;
 using System;
 using System.Numerics;
 using Collatz.Core;
+using System.Linq;
 
 namespace Collatz.Api.Controllers
 {
@@ -29,7 +30,7 @@ namespace Collatz.Api.Controllers
 				this.logger.Log(
 					$"{nameof(CollatzController)}.{nameof(CollatzController.Get)}, sequence length for {value} is {sequence.Sequence.Length}");
 
-				return this.Ok(sequence.Sequence);
+				return this.Ok(sequence.Sequence.Select(_ => _.ToString()));
 			}
 			else
 			{

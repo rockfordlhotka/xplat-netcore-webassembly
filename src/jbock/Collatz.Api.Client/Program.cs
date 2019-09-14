@@ -9,7 +9,7 @@ namespace Collatz.Api.Client
 	class Program
 	{
 		private const int RetryCount = 4;
-		private static readonly TimeSpan Retry = TimeSpan.FromMilliseconds(100);
+		private static readonly TimeSpan Retry = TimeSpan.FromMilliseconds(2000);
 		private static readonly Uri BaseUri = new Uri("http://localhost:5000");
 		private const string CollatzGetApi = "/api/collatz";
 
@@ -33,7 +33,7 @@ namespace Collatz.Api.Client
 			}
 		}
 
-		private static RetryPolicy CreatePolicy() =>
+		private static AsyncRetryPolicy CreatePolicy() =>
 			Policy.Handle<HttpRequestException>(e =>
 			{
 				Console.WriteLine($"Could not call the service, sorry!");

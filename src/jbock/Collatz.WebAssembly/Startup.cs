@@ -6,7 +6,7 @@ namespace Collatz.WebAssembly
 {
 	public class Startup
 	{
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			var provider = new FileExtensionContentTypeProvider();
 			provider.Mappings[".wasm"] = "application/octet-stream";

@@ -1,6 +1,4 @@
 ﻿@using Collatz.Client.Mvvm
-@using Telerik.Blazor
-@using Telerik.Blazor.Components.Chart
 
 @page "/sequence-mvvm"
 
@@ -24,27 +22,13 @@
 </div>
 
 <p>Current sequence: @this.ViewModel.CurrentSequence</p>
-<input type="text" bind="@this.ViewModel.Value" />
-<button class="btn btn-primary" onclick="@this.ViewModel.CreateSequence">Create Sequence</button>
-
-<TelerikChart>
-    <TelerikChartSeriesItems>
-        <TelerikChartSeries Type="ChartSeriesType.Line" Name="Values" Style="ChartSeriesStyle.Smooth" Data="@this.ViewModel.Sequence" />
-    </TelerikChartSeriesItems>
-
-    <TelerikChartCategoryAxes>
-        <TelerikChartCategoryAxis Categories="@this.ViewModel.Labels" />
-    </TelerikChartCategoryAxes>
-
-    <TelerikChartTitle Text="Current Sequence" />
-
-    <TelerikChartLegend Position="ChartLegendPosition.Right" />
-</TelerikChart>
+<input type="text" @bind="this.ViewModel.Value" />
+<button class="btn btn-primary" @onclick="this.ViewModel.CreateSequence">Create Sequence</button>
 
 <canvas id=@this.ViewModel.CollatzChartId></canvas>
 
-@functions {
-   protected override async Task OnInitAsync()
+@code {
+   protected override async Task OnInitializedAsync()
    {
        this.ViewModel.Changed += (s, e) => this.StateHasChanged();
        await this.ViewModel.GetGeolocationAsync();
