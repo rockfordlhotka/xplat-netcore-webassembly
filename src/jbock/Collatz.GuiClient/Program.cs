@@ -7,7 +7,7 @@ namespace Collatz.GuiClient
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			Application.Init();
 			var top = Application.Top;

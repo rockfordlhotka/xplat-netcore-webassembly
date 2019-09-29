@@ -4,6 +4,7 @@ using System;
 using System.Numerics;
 using Collatz.Core;
 using System.Linq;
+using System.Collections.Immutable;
 
 namespace Collatz.Api.Controllers
 {
@@ -30,7 +31,7 @@ namespace Collatz.Api.Controllers
 				this.logger.Log(
 					$"{nameof(CollatzController)}.{nameof(CollatzController.Get)}, sequence length for {value} is {sequence.Sequence.Length}");
 
-				return this.Ok(sequence.Sequence.Select(_ => _.ToString()));
+				return this.Ok(sequence.Sequence.Select(_ => _.ToString()).ToImmutableArray());
 			}
 			else
 			{

@@ -4,10 +4,10 @@ namespace Collatz.Client
 {
 	public class Program
 	{
-		public static void Main(string[] args) => 
-			Program.CreateHostBuilder(args).Build().Run();
+		public static void Main() => 
+			Program.CreateHostBuilder().Build().Run();
 
-		public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
+		public static IWebAssemblyHostBuilder CreateHostBuilder() =>
 			 BlazorWebAssemblyHost.CreateDefaultBuilder()
 				  .UseBlazorStartup<Startup>();
 	}

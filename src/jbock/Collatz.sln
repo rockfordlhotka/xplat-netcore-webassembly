@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Client", "Collatz.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.AvaloniaClient", "Collatz.AvaloniaClient\Collatz.AvaloniaClient.csproj", "{3D4CDCCD-A426-453F-85B3-FF00D47A4CAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.Client.Mvvm", "Collatz.Client.Mvvm\Collatz.Client.Mvvm.csproj", "{9017600B-402B-4202-B78B-F9A25B69A270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collatz.Client.Mvvm", "Collatz.Client.Mvvm\Collatz.Client.Mvvm.csproj", "{9017600B-402B-4202-B78B-F9A25B69A270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collatz.UsingWasmInCSharp", "Collatz.UsingWasmInCSharp\Collatz.UsingWasmInCSharp.csproj", "{F1EA4F28-CAF2-492E-A1CC-2D245733A76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{9017600B-402B-4202-B78B-F9A25B69A270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9017600B-402B-4202-B78B-F9A25B69A270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9017600B-402B-4202-B78B-F9A25B69A270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EA4F28-CAF2-492E-A1CC-2D245733A76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EA4F28-CAF2-492E-A1CC-2D245733A76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EA4F28-CAF2-492E-A1CC-2D245733A76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EA4F28-CAF2-492E-A1CC-2D245733A76C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

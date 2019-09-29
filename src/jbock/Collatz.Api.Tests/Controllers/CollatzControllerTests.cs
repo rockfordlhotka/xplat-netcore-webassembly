@@ -25,15 +25,15 @@ namespace Collatz.Api.Tests.Controllers
 
 			var controller = new CollatzController(logger.Make());
 			var result = (OkObjectResult)controller.Get(value).Result;
-			var resultValue = (ImmutableArray<BigInteger>)result.Value;
+			var resultValue = (ImmutableArray<string>)result.Value;
 
 			Assert.That(result.StatusCode, Is.EqualTo(200));
 			Assert.That(resultValue.Length, Is.EqualTo(5));
-			Assert.That(resultValue[0], Is.EqualTo(new BigInteger(5)));
-			Assert.That(resultValue[1], Is.EqualTo(new BigInteger(8)));
-			Assert.That(resultValue[2], Is.EqualTo(new BigInteger(4)));
-			Assert.That(resultValue[3], Is.EqualTo(new BigInteger(2)));
-			Assert.That(resultValue[4], Is.EqualTo(new BigInteger(1)));
+			Assert.That(resultValue[0], Is.EqualTo("5"));
+			Assert.That(resultValue[1], Is.EqualTo("8"));
+			Assert.That(resultValue[2], Is.EqualTo("4"));
+			Assert.That(resultValue[3], Is.EqualTo("2"));
+			Assert.That(resultValue[4], Is.EqualTo("1"));
 
 			logger.Verify();
 		}
