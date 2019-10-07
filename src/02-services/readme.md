@@ -1,5 +1,8 @@
 Docker/Kubernetes Services Demo
 -------------------------------
+**A newer version of this demo exists as part of the [Cloud-Native Hands-on-Lab](https://github.com/rockfordlhotka/Cloud-Native-HOL) repo. Specifically look at the `/src/Lab03/End` directory**
+
+
 This demo uses a number of services to demonstrate communication between services and an end user via a web site.
 
 * Greeter - a simple hello world implementation - not part of the rest of the demo
