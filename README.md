@@ -15,6 +15,7 @@ Primary topic areas:
   * [Uno](https://platform.uno) - UWP XAML in WebAssembly
   * [Ooui](https://github.com/praeclarum/Ooui) - Xamarin Forms in WebAssembly
   * [Avalonia](https://github.com/AvaloniaUI/Avalonia) - WPF XAML in WebAssembly
+  * Various examples from the [CSLA .NET samples](https://github.com/MarimerLLC/csla/tree/master/Samples)
  
 ## Workshop Abstract
 
