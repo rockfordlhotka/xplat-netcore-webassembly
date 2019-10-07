@@ -52,10 +52,13 @@
         this.StateHasChanged();
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.InvokeAsync<object>(
-           "getGeolocation", DotNetObjectReference.Create(this));
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<object>(
+               "getGeolocation", DotNetObjectReference.Create(this));
+        }
     }
 
     async Task CreateSequence()

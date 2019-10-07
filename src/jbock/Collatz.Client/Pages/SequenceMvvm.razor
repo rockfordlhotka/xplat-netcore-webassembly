@@ -28,9 +28,16 @@
 <canvas id=@this.ViewModel.CollatzChartId></canvas>
 
 @code {
-   protected override async Task OnInitializedAsync()
-   {
-       this.ViewModel.Changed += (s, e) => this.StateHasChanged();
-       await this.ViewModel.GetGeolocationAsync();
-   }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.ViewModel.GetGeolocationAsync();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        this.ViewModel.Changed += (s, e) => this.StateHasChanged();
+    }
 }
